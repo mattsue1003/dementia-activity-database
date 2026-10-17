@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>失智長輩活動資料庫</title>
+<meta name="description" content="給據點、日照中心與居家照顧者：失智長輩也能參與的活動教案、YouTube／Shorts 影片與網頁資源，可搜尋、分類標籤、收藏與自建清單。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#E8552D;--amber:#F4A93C;--teal:#028090;--ink:#12343B;
+  --bg:#FFF8EF;--paper:#FFFFFF;--soft:#FFF1E0;--line:#F0DCC4;--muted:#5D6B6E;
+  --teal-soft:#E3F3F4;--orange-soft:#FDE6DE;--amber-soft:#FEF0D6;
+  --shadow:0 6px 18px rgba(18,52,59,.08);
+  --r:18px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12201F;--paper:#1B2B2C;--soft:#223536;--line:#2F4647;--muted:#A9B9BA;--ink:#F2F5F4;
+  --teal-soft:#183C3E;--orange-soft:#3E2620;--amber-soft:#3B3220;--shadow:0 6px 18px rgba(0,0,0,.3);}}
+:root[data-theme="dark"]{
+  --bg:#12201F;--paper:#1B2B2C;--soft:#223536;--line:#2F4647;--muted:#A9B9BA;--ink:#F2F5F4;
+  --teal-soft:#183C3E;--orange-soft:#3E2620;--amber-soft:#3B3220;--shadow:0 6px 18px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+html{font-size:18px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;line-height:1.65}
+a{color:var(--teal)}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1400px;margin:0 auto;padding:0 24px}
+@media(max-width:640px){.wrap{padding:0 16px}html{font-size:17px}}
+
+/* header */
+header.top{background:linear-gradient(135deg,var(--orange) 0%,var(--amber) 100%);color:#fff;position:relative;overflow:hidden}
+header.top::before,header.top::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.13)}
+header.top::before{width:340px;height:340px;right:-80px;top:-140px}
+header.top::after{width:200px;height:200px;left:38%;bottom:-120px}
+.hero{display:flex;gap:24px;align-items:center;justify-content:space-between;padding-top:26px;padding-bottom:22px;position:relative;z-index:1;flex-wrap:wrap}
+.hero h1{margin:0;font-size:2.1rem;font-weight:900;letter-spacing:.04em}
+.hero p{margin:4px 0 0;font-size:1.05rem;opacity:.95}
+.sign{font-size:.85rem;background:rgba(255,255,255,.2);padding:6px 14px;border-radius:999px;white-space:nowrap}
+.theme-btn{background:rgba(255,255,255,.25);border:0;color:#fff;border-radius:999px;padding:6px 14px;font-size:.85rem;margin-left:8px}
+nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:2px solid var(--line);box-shadow:var(--shadow)}
+nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav.tabs .wrap::-webkit-scrollbar{display:none}
+nav.tabs button{border:0;background:none;padding:14px 16px;font-size:1.05rem;font-weight:700;color:var(--muted);border-bottom:4px solid transparent;white-space:nowrap}
+nav.tabs button.on{color:var(--orange);border-bottom-color:var(--orange)}
+nav.tabs .badge{display:inline-block;min-width:24px;padding:0 7px;border-radius:999px;background:var(--orange-soft);color:var(--orange);font-size:.78rem;margin-left:4px}
+main{padding:24px 0 60px}
+section.view{display:none}
+section.view.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* home */
+.home-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:1000px){.home-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.home-grid{grid-template-columns:1fr 1fr;gap:12px}.stat{padding:16px}.stat .n{font-size:2rem}.stat .d{display:none}}
+.stat{background:var(--paper);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);border:2px solid var(--line);cursor:pointer;transition:transform .15s}
+.stat:hover{transform:translateY(-3px)}
+.stat .n{font-size:2.6rem;font-weight:900;line-height:1.1}
+.stat .l{font-size:1.05rem;font-weight:700}
+.stat .d{color:var(--muted);font-size:.9rem;margin-top:6px}
+.stat.c1 .n{color:var(--orange)}.stat.c2 .n{color:var(--teal)}.stat.c3 .n{color:#C27A00}.stat.c4 .n{color:#B5446E}
+h2.sec{font-size:1.5rem;margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+h2.sec::before{content:"";width:10px;height:28px;border-radius:6px;background:var(--orange)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.quick{grid-template-columns:1fr}}
+.qcard{background:var(--paper);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);border-top:8px solid var(--teal)}
+.qcard:nth-child(2){border-top-color:var(--orange)}.qcard:nth-child(3){border-top-color:var(--amber)}
+.qcard h3{margin:0 0 6px;font-size:1.3rem}
+.qcard p{margin:0 0 12px;color:var(--muted)}
+.qcard .btns{display:flex;gap:8px;flex-wrap:wrap}
+.stage-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.stage-row{grid-template-columns:1fr}}
+.stage{background:var(--paper);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+.stage h3{margin:0 0 6px;font-size:1.25rem}
+.stage ul{margin:6px 0 0;padding-left:1.2em}
+.note-box{background:var(--teal-soft);border-radius:var(--r);padding:18px 22px;margin-top:18px}
+.note-box b{color:var(--teal)}
+
+/* common controls */
+.btn{border:0;border-radius:999px;padding:9px 18px;font-weight:700;background:var(--soft);color:var(--ink);font-size:.95rem;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn:hover{filter:brightness(.96)}
+.btn.pri{background:var(--orange);color:#fff}
+.btn.teal{background:var(--teal);color:#fff}
+.btn.ghost{background:transparent;border:2px solid var(--line)}
+.btn.sm{padding:6px 12px;font-size:.85rem}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.search{flex:1;min-width:220px;position:relative}
+.search input{width:100%;font:inherit;font-size:1.05rem;padding:12px 16px 12px 46px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink)}
+.search input:focus{outline:none;border-color:var(--orange)}
+.search::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:1rem}
+select{font:inherit;padding:10px 14px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink)}
+.layout{display:grid;grid-template-columns:290px 1fr;gap:22px;align-items:start}
+@media(max-width:960px){.layout{grid-template-columns:1fr}}
+aside.filters{background:var(--paper);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);position:sticky;top:70px;max-height:calc(100vh - 90px);overflow:auto}
+@media(max-width:960px){aside.filters{position:static;max-height:none;display:none}aside.filters.open{display:block}}
+.ftoggle{display:none}
+@media(max-width:960px){.ftoggle{display:inline-flex}}
+.fgroup{margin-bottom:14px}
+.fgroup h4{margin:0 0 8px;font-size:.98rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:.88rem;font-weight:500}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.chip .c{opacity:.6;font-size:.78rem;margin-left:3px}
+.result-info{color:var(--muted);margin:0 0 12px;font-size:.95rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700;background:var(--soft);color:var(--ink);margin:2px 4px 2px 0}
+.tag.lv{background:var(--orange-soft);color:var(--orange)}
+.tag.st{background:var(--teal-soft);color:var(--teal)}
+.tag.my{background:var(--amber-soft);color:#9A5B00}
+:root[data-theme="dark"] .tag.my{color:var(--amber)}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);background:var(--paper);border-radius:var(--r);border:2px dashed var(--line)}
+
+/* lesson cards */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.lcard{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px;display:flex;flex-direction:column;gap:8px;border-left:8px solid var(--teal);cursor:pointer;transition:transform .15s;position:relative}
+.lcard:hover{transform:translateY(-3px)}
+.lcard .cat{font-size:.85rem;color:var(--muted);font-weight:700}
+.lcard h3{margin:0;font-size:1.3rem;line-height:1.35;padding-right:40px}
+.lcard p{margin:0;color:var(--muted);font-size:.95rem;flex:1}
+.lcard .meta{font-size:.85rem;color:var(--muted)}
+.heart{position:absolute;top:12px;right:12px;border:0;background:var(--soft);width:42px;height:42px;border-radius:50%;font-size:1.3rem;line-height:1;display:grid;place-items:center}
+.heart.on{background:var(--orange-soft)}
+.cat-懷舊與生命回顧{border-left-color:#B5446E}.cat-音樂與節奏{border-left-color:#7A5AF8}.cat-感官與放鬆{border-left-color:#4FA36B}
+.cat-認知刺激{border-left-color:var(--teal)}.cat-身體活動{border-left-color:var(--orange)}.cat-生活任務{border-left-color:#C27A00}
+.cat-藝術與手作{border-left-color:#E07BA6}.cat-園藝與自然{border-left-color:#4B8F3A}.cat-團康遊戲{border-left-color:var(--amber)}
+.cat-節慶與社會參與{border-left-color:#D9534F}.cat-居家個別化{border-left-color:#5B7FA6}
+
+/* video cards */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.vgrid.list{grid-template-columns:1fr}
+.vcard{background:var(--paper);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative}
+.vgrid.list .vcard{flex-direction:row}
+.vthumb{position:relative;aspect-ratio:16/9;background:#000 center/cover no-repeat;cursor:pointer;flex-shrink:0}
+.vgrid.list .vthumb{width:240px}
+@media(max-width:560px){.vgrid.list .vthumb{width:140px}}
+.vthumb .fmt{position:absolute;left:8px;top:8px;background:var(--orange);color:#fff;font-size:.75rem;font-weight:700;border-radius:6px;padding:2px 8px}
+.vthumb .fmt.long{background:var(--teal)}
+.vthumb .len{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.75);color:#fff;font-size:.78rem;border-radius:6px;padding:1px 7px}
+.vthumb .seen{position:absolute;left:8px;bottom:8px;background:rgba(2,128,144,.9);color:#fff;font-size:.75rem;border-radius:6px;padding:1px 7px}
+.vthumb .play{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.2s;background:rgba(0,0,0,.25)}
+.vthumb:hover .play{opacity:1}
+.vthumb .play span{width:56px;height:56px;border-radius:50%;background:rgba(232,85,45,.95);display:grid;place-items:center;color:#fff;font-size:1.4rem}
+.vbody{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.vbody h4{margin:0;font-size:1.05rem;line-height:1.35;cursor:pointer}
+.vbody .how{font-size:.88rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vactions{display:flex;gap:6px;margin-top:auto;padding-top:6px;flex-wrap:wrap}
+.vactions button{white-space:nowrap;border:0;background:var(--soft);border-radius:999px;padding:6px 11px;font-size:.85rem;color:var(--ink)}
+.vactions button.on{background:var(--orange-soft);color:var(--orange)}
+.fmt-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.fmt-tabs button{border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 16px;font-weight:700;color:var(--ink)}
+.fmt-tabs button.on{background:var(--orange);border-color:var(--orange);color:#fff}
+
+/* resources */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+@media(max-width:400px){.rgrid{grid-template-columns:1fr}}
+.rcard{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px;position:relative;display:flex;flex-direction:column;gap:6px}
+.rcard h3{margin:0;font-size:1.15rem;padding-right:44px;line-height:1.4}
+.rcard .org{font-size:.88rem;color:var(--muted)}
+.rcard p{margin:0;font-size:.95rem}
+.rcard .ev{background:var(--amber-soft);border-radius:12px;padding:8px 12px;font-size:.88rem}
+.type-badge{display:inline-block;font-size:.78rem;font-weight:700;border-radius:6px;padding:1px 8px;background:var(--teal-soft);color:var(--teal)}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:18px}
+.legend div{background:var(--paper);border-radius:14px;padding:12px 16px;font-size:.92rem;box-shadow:var(--shadow)}
+.search-out{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:10px}
+@media(max-width:800px){.search-out{grid-template-columns:1fr}}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(10,25,28,.6);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto}
+.modal.on{display:flex}
+.mbox{background:var(--paper);border-radius:22px;max-width:980px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);position:relative;animation:pop .2s ease}
+@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:none;opacity:1}}
+.mclose{position:absolute;top:12px;right:12px;width:46px;height:46px;border-radius:50%;border:0;background:var(--soft);font-size:1.4rem;z-index:3;color:var(--ink)}
+.mhead{padding:26px 28px 16px;border-bottom:2px solid var(--line)}
+.mhead h2{margin:4px 60px 8px 0;font-size:1.7rem;line-height:1.3}
+.mbody{padding:20px 28px 28px}
+@media(max-width:560px){.mhead,.mbody{padding-left:18px;padding-right:18px}.mhead h2{font-size:1.4rem}}
+.lsec{margin-bottom:22px}
+.lsec h3{font-size:1.15rem;margin:0 0 8px;color:var(--orange)}
+.lsec ol,.lsec ul{margin:0;padding-left:1.4em}
+.lsec li{margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.adapt{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:760px){.adapt{grid-template-columns:1fr}}
+.adapt div{background:var(--soft);border-radius:14px;padding:12px 14px;font-size:.95rem}
+.adapt b{display:block;color:var(--teal);margin-bottom:4px}
+.mini-v{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.mini-v .vcard .vbody h4{font-size:.95rem}
+.player{background:#000;border-radius:22px 22px 0 0;overflow:hidden;display:flex;justify-content:center}
+.player iframe{border:0;width:100%;aspect-ratio:16/9;display:block}
+.player.shorts iframe{width:min(380px,100%);aspect-ratio:9/16;max-height:72vh}
+.vinfo{padding:18px 26px 26px}
+@media(max-width:560px){.vinfo{padding:16px}}
+.vinfo h2{margin:0 0 6px;font-size:1.45rem}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-weight:700;font-size:.95rem}
+.field input,.field textarea{font:inherit;padding:10px 14px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink)}
+.field textarea{min-height:80px;resize:vertical}
+.listpick{display:flex;flex-direction:column;gap:8px}
+.listpick label{display:flex;gap:10px;align-items:center;background:var(--soft);border-radius:12px;padding:10px 14px;cursor:pointer}
+.listpick input{width:20px;height:20px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:var(--paper);padding:12px 22px;border-radius:999px;z-index:200;transition:.3s;font-weight:700}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+/* lists */
+.lists-wrap{display:grid;grid-template-columns:280px 1fr;gap:20px}
+@media(max-width:900px){.lists-wrap{grid-template-columns:1fr}}
+.list-item{display:flex;justify-content:space-between;align-items:center;background:var(--paper);border-radius:14px;padding:12px 16px;margin-bottom:8px;cursor:pointer;border:2px solid transparent;box-shadow:var(--shadow)}
+.list-item.on{border-color:var(--orange)}
+.list-item small{color:var(--muted)}
+.fav-sec{margin-bottom:30px}
+footer{text-align:center;color:var(--muted);font-size:.88rem;padding:24px 16px 40px;border-top:2px solid var(--line)}
+@media print{header.top,nav.tabs,footer,.toolbar,aside,.mclose,.noprint{display:none!important}.modal{position:static;background:none;padding:0}.mbox{box-shadow:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap hero">
+    <div>
+      <h1>失智長輩活動資料庫</h1>
+      <p>據點・日照・居家都能用的活動教案、YouTube／Shorts 影片與網頁資源</p>
+    </div>
+    <div><span class="sign">設計者｜愛迪樂 鍾孟修 職能治療師</span><button class="theme-btn" id="themeBtn">🌙 深色</button></div>
+  </div>
+</header>
+<nav class="tabs"><div class="wrap">
+  <button data-tab="home" class="on">🏠 首頁</button>
+  <button data-tab="lessons">📘 活動教案</button>
+  <button data-tab="videos">🎬 影片資料庫</button>
+  <button data-tab="web">🌐 網頁資源</button>
+  <button data-tab="lists">🗂️ 我的清單</button>
+  <button data-tab="favs">❤️ 我的最愛<span class="badge" id="favCount">0</span></button>
+</div></nav>
+
+<main class="wrap">
+<!-- HOME -->
+<section class="view on" id="v-home">
+  <div class="home-grid">
+    <div class="stat c1" data-go="lessons"><div class="n" id="sL">0</div><div class="l">活動教案</div><div class="d">每份都有步驟、三種程度調整、帶領提醒與相關影片</div></div>
+    <div class="stat c2" data-go="videos"><div class="n" id="sV">0</div><div class="l">YouTube／Shorts 影片</div><div class="d">已標註失智程度與適用場域，也能自己新增影片</div></div>
+    <div class="stat c3" data-go="web"><div class="n" id="sW">0</div><div class="l">網頁資源</div><div class="d">台灣與國際機構的活動指引、實務文章</div></div>
+    <div class="stat c4" data-go="favs"><div class="n" id="sF">0</div><div class="l">我的收藏</div><div class="d">收藏教案、影片、網頁，並整理成自己的清單</div></div>
+  </div>
+
+  <h2 class="sec">依照服務場域找活動</h2>
+  <div class="quick">
+    <div class="qcard"><h3>🏘️ 社區據點</h3><p>人數多、能力差異大：選坐姿團體活動、懷舊與音樂，讓每個人都能參與。</p><div class="btns"><button class="btn teal" data-quick="據點|lessons">據點教案</button><button class="btn ghost" data-quick="據點|videos">據點影片</button></div></div>
+    <div class="qcard"><h3>🏥 日照中心</h3><p>一天中有固定作息：晨間聊天、上午身體活動、下午安靜活動、傍晚安定活動。</p><div class="btns"><button class="btn teal" data-quick="日照|lessons">日照教案</button><button class="btn ghost" data-quick="日照|videos">日照影片</button></div></div>
+    <div class="qcard"><h3>🏠 居家</h3><p>一對一、用家裡現有的東西：找出長輩的興趣，把活動放進每天固定的時間。</p><div class="btns"><button class="btn teal" data-quick="居家|lessons">居家教案</button><button class="btn ghost" data-quick="居家|videos">居家影片</button></div></div>
+  </div>
+
+  <h2 class="sec">依失智程度挑活動</h2>
+  <div class="stage-row">
+    <div class="stage"><h3>輕度</h3>還能理解規則、喜歡有挑戰：<ul><li>加入簡單規則與選擇</li><li>請長輩擔任小老師、小幫手</li><li>懷舊、討論、合作遊戲</li></ul><button class="btn sm" data-stage="輕度" style="margin-top:10px">看輕度適用</button></div>
+    <div class="stage"><h3>中度</h3>需要較多提示、注意力較短：<ul><li>一次一個步驟、一個指令</li><li>二選一或是非題代替開放式問題</li><li>熟悉的家事、老歌、實物</li></ul><button class="btn sm" data-stage="中度" style="margin-top:10px">看中度適用</button></div>
+    <div class="stage"><h3>重度</h3>以感官與情緒為主：<ul><li>觸摸、聞味道、聽音樂</li><li>手把手一起做，碰到就算成功</li><li>重點在放鬆、笑容與陪伴</li></ul><button class="btn sm" data-stage="重度" style="margin-top:10px">看重度適用</button></div>
+  </div>
+  <div class="note-box">
+    <b>帶領失智長輩的四個原則</b>
+    <ul style="margin:6px 0 0;padding-left:1.2em">
+      <li><b>用告訴代替考問：</b>說「我是小美，今天陪您」，不問「記不記得我是誰」。</li>
+      <li><b>引導階梯：</b>口語提示 → 示範 → 碰觸提示 → 手把手，從最少的協助開始。</li>
+      <li><b>重點在過程：</b>愉快與成就感比做得好不好重要，不糾正、不重做長輩的作品。</li>
+      <li><b>看長輩的狀態調整：</b>出現疲倦、煩躁就換活動或休息；不安加劇時請醫療團隊評估。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section class="view" id="v-lessons">
+  <div class="toolbar">
+    <div class="search"><input id="lq" placeholder="搜尋教案：例如 老歌、摺衣服、氣球…" aria-label="搜尋教案"></div>
+    <button class="btn ftoggle" data-ft="lf">⚙️ 篩選</button>
+  </div>
+  <div class="layout">
+    <aside class="filters" id="lf"></aside>
+    <div><div class="result-info"><span id="lInfo"></span><button class="btn sm ghost" id="lClear">清除篩選</button></div><div class="lgrid" id="lGrid"></div></div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="view" id="v-videos">
+  <div class="toolbar">
+    <div class="fmt-tabs" id="fmtTabs">
+      <button data-f="all" class="on">全部</button><button data-f="Shorts">Shorts</button><button data-f="長片">長片</button><button data-f="mine">我新增的</button>
+    </div>
+    <div class="search"><input id="vq" placeholder="搜尋影片：玩法、道具、我的標籤…" aria-label="搜尋影片"></div>
+    <select id="vSort" aria-label="排序"><option value="views">觀看次數多</option><option value="new">最新發布</option><option value="short">長度短</option><option value="title">名稱</option></select>
+    <button class="btn" id="vView" title="切換格狀／清單">☰ 清單</button>
+    <button class="btn pri" id="addVideoBtn">＋ 新增影片</button>
+    <button class="btn ftoggle" data-ft="vf">⚙️ 篩選</button>
+  </div>
+  <div class="layout">
+    <aside class="filters" id="vf"></aside>
+    <div><div class="result-info"><span id="vInfo"></span><button class="btn sm ghost" id="vClear">清除篩選</button></div><div class="vgrid" id="vGrid"></div><div style="text-align:center;margin-top:18px"><button class="btn" id="vMore">顯示更多</button></div></div>
+  </div>
+</section>
+
+<!-- WEB -->
+<section class="view" id="v-web">
+  <div class="legend">
+    <div><span class="type-badge">官方資訊／機構指引</span><br>政府、WHO 或失智症協會整理的照顧建議，適合當作帶領原則。</div>
+    <div><span class="type-badge">研究與指引</span><br>有研究支持並被國際指引推薦的做法，參考價值較高；卡片上說明研究怎麼做。</div>
+    <div><span class="type-badge">研究報導</span><br>媒體報導的研究結果，會註明研究類型；觀察性研究只能看出關聯，不能證明因果。</div>
+    <div><span class="type-badge">實務文章／專業衛教</span><br>治療師與照顧單位的經驗分享，適合找活動點子與帶領技巧。</div>
+  </div>
+  <div class="toolbar">
+    <div class="search"><input id="wq" placeholder="搜尋網頁資源…" aria-label="搜尋網頁"></div>
+    <div class="chips" id="wTopics"></div>
+  </div>
+  <div class="rgrid" id="wGrid"></div>
+  <h2 class="sec">找更多：Google／YouTube 一鍵搜尋</h2>
+  <div class="toolbar"><div class="search"><input id="sq" value="失智 長輩 活動" aria-label="搜尋關鍵字"></div></div>
+  <div class="chips" id="sPreset" style="margin-bottom:12px"></div>
+  <div class="search-out">
+    <a class="btn teal" id="gLink" target="_blank" rel="noopener" style="justify-content:center;padding:14px">🔎 用 Google 搜尋</a>
+    <a class="btn pri" id="yLink" target="_blank" rel="noopener" style="justify-content:center;padding:14px">▶️ 用 YouTube 搜尋</a>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">在 YouTube 找到好影片後，複製網址回到「影片資料庫 → ＋新增影片」，就能加上標籤收進你的資料庫。</p>
+</section>
+
+<!-- LISTS -->
+<section class="view" id="v-lists">
+  <div class="toolbar"><button class="btn pri" id="newList">＋ 建立新清單</button><span style="color:var(--muted)">例如：週一據點活動、居家個案王阿嬤、雨天室內活動</span></div>
+  <div class="lists-wrap"><div id="listNames"></div><div id="listBody"></div></div>
+</section>
+
+<!-- FAVS -->
+<section class="view" id="v-favs">
+  <div class="toolbar">
+    <button class="btn teal" id="exportBtn">⬇️ 匯出我的資料</button>
+    <label class="btn ghost" style="cursor:pointer">⬆️ 匯入資料<input type="file" id="importFile" accept=".json" hidden></label>
+    <span style="color:var(--muted);font-size:.9rem">收藏、清單、自訂標籤與新增的影片都存在這台裝置的瀏覽器；換裝置前請先匯出備份。</span>
+  </div>
+  <div id="favBody"></div>
+</section>
+</main>
+
+<footer>
+  影片版權屬於各頻道（REHA SHINE／リハシャインみやこんじょ 等），本站只提供連結與嵌入播放；中文玩法為依影片畫面整理的摘要，細節以影片為準。<br>
+  網頁資源連結至原始網站，內容以原網站為準。・ 設計者｜愛迪樂 鍾孟修 職能治療師
+</footer>
+
+<div class="modal" id="modal"><div class="mbox" id="mbox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*__DATA__*/
+(function(){
+const {lessons,resources,videos}=window.DB;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LV=['輕度','中度','重度'], SET=['據點','日照','居家'];
+
+/* ---------- storage ---------- */
+const KEY='dementia-activity-db-v1';
+let S={favL:[],favV:[],favW:[],lists:[],myVideos:[],vTags:{},notes:{},watched:{}};
+try{const t=localStorage.getItem(KEY);if(t)S=Object.assign(S,JSON.parse(t));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}updateCounts();}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),1800);}
+const allVideos=()=>videos.concat(S.myVideos);
+const vById=id=>allVideos().find(v=>v.id===id);
+const lById=id=>lessons.find(l=>l.id===id);
+const wById=id=>resources.find(r=>r.id===id);
+function toggle(arr,id){const i=arr.indexOf(id);if(i>=0)arr.splice(i,1);else arr.push(id);return i<0;}
+
+/* ---------- theme ---------- */
+(function(){let th=null;try{th=localStorage.getItem(KEY+'-theme');}catch(e){}
+  if(th)document.documentElement.dataset.theme=th;else document.documentElement.dataset.theme='light';
+  const b=$('#themeBtn');const upd=()=>b.textContent=document.documentElement.dataset.theme==='dark'?'☀️ 淺色':'🌙 深色';upd();
+  b.onclick=()=>{const n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem(KEY+'-theme',n);}catch(e){}upd();};})();
+
+/* ---------- tabs / routing ---------- */
+function show(tab){$$('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));$$('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+tab));
+  if(tab==='favs')renderFavs();if(tab==='lists')renderLists();window.scrollTo({top:0});}
+$$('nav.tabs button').forEach(b=>b.onclick=()=>{location.hash=b.dataset.tab;});
+window.addEventListener('hashchange',route);
+function route(){const h=decodeURIComponent(location.hash.slice(1));
+  if(h.startsWith('lesson/')){show('lessons');openLesson(h.split('/')[1]);return;}
+  show(['home','lessons','videos','web','lists','favs'].includes(h)?h:'home');}
+$$('[data-go]').forEach(e=>e.onclick=()=>location.hash=e.dataset.go);
+$$('[data-ft]').forEach(b=>b.onclick=()=>$('#'+b.dataset.ft).classList.toggle('open'));
+
+/* ---------- filter engine ---------- */
+function count(items,fn){const c={};items.forEach(it=>[].concat(fn(it)||[]).forEach(k=>{if(k)c[k]=(c[k]||0)+1;}));return c;}
+function renderFilterGroups(el,groups,state,onChange){
+  el.innerHTML=groups.map(g=>{const keys=g.order||Object.keys(g.counts).sort((a,b)=>g.counts[b]-g.counts[a]);
+    if(!keys.length)return '';
+    return `<div class="fgroup"><h4>${g.label}</h4><div class="chips">${keys.filter(k=>g.counts[k]||g.order).map(k=>`<button class="chip ${state[g.key]?.has(k)?'on':''}" data-g="${g.key}" data-k="${esc(k)}">${esc(k)}<span class="c">${g.counts[k]||0}</span></button>`).join('')}</div></div>`;}).join('');
+  el.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const g=c.dataset.g,k=c.dataset.k;state[g]=state[g]||new Set();state[g].has(k)?state[g].delete(k):state[g].add(k);onChange();});
+}
+const matchAny=(set,vals)=>!set||!set.size||[].concat(vals||[]).some(v=>set.has(v));
+
+/* ---------- lessons ---------- */
+const LF={};
+function lessonFiltered(){const q=$('#lq').value.trim().toLowerCase();
+  return lessons.filter(l=>matchAny(LF.set,l.settings)&&matchAny(LF.lv,l.stages)&&matchAny(LF.cat,l.cat)&&matchAny(LF.goal,l.goals)
+    &&(!q||JSON.stringify(l).toLowerCase().includes(q)));}
+function renderLessons(){
+  const cats=[...new Set(lessons.map(l=>l.cat))];
+  renderFilterGroups($('#lf'),[
+    {key:'set',label:'服務場域',counts:count(lessons,l=>l.settings),order:SET},
+    {key:'lv',label:'失智程度',counts:count(lessons,l=>l.stages),order:LV},
+    {key:'cat',label:'活動類別',counts:count(lessons,l=>l.cat),order:cats},
+    {key:'goal',label:'活動目標',counts:count(lessons,l=>l.goals)}],LF,renderLessons);
+  const list=lessonFiltered();
+  $('#lInfo').textContent=`共 ${list.length} 份教案`;
+  $('#lGrid').innerHTML=list.length?list.map(lessonCard).join(''):'<div class="empty">沒有符合的教案，試試清除篩選。</div>';
+  bindLessonCards($('#lGrid'));
+}
+function lessonCard(l){const on=S.favL.includes(l.id);
+  return `<div class="lcard cat-${l.cat}" data-l="${l.id}"><button class="heart ${on?'on':''}" data-fl="${l.id}" aria-label="收藏">${on?'❤️':'🤍'}</button>
+  <div class="cat">${esc(l.cat)}</div><h3>${esc(l.title)}</h3><p>${esc(l.summary)}</p>
+  <div>${l.settings.map(s=>`<span class="tag st">${s}</span>`).join('')}${l.stages.map(s=>`<span class="tag lv">${s}</span>`).join('')}</div>
+  <div class="meta">👥 ${esc(l.group)}${l.videos.length?` ・ 🎬 ${l.videos.length} 支影片`:''} ・ 🌐 ${l.links.length} 個網頁</div></div>`;}
+function bindLessonCards(root){
+  root.querySelectorAll('[data-l]').forEach(c=>c.onclick=e=>{if(e.target.closest('[data-fl]'))return;location.hash='lesson/'+c.dataset.l;});
+  root.querySelectorAll('[data-fl]').forEach(b=>b.onclick=e=>{e.stopPropagation();const added=toggle(S.favL,b.dataset.fl);save();toast(added?'已加入我的最愛':'已移除收藏');refreshAll();});
+}
+$('#lq').oninput=renderLessons;
+$('#lClear').onclick=()=>{Object.keys(LF).forEach(k=>delete LF[k]);$('#lq').value='';renderLessons();};
+
+function openLesson(id){const l=lById(id);if(!l)return;const on=S.favL.includes(id);
+  const gq=encodeURIComponent(l.q);
+  $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉">✕</button>
+  <div class="mhead"><span class="tag">${esc(l.cat)}</span>${l.settings.map(s=>`<span class="tag st">${s}</span>`).join('')}${l.stages.map(s=>`<span class="tag lv">${s}</span>`).join('')}
+    <h2>${esc(l.title)}</h2><p style="margin:0 0 12px;font-size:1.05rem">${esc(l.summary)}</p>
+    <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ${on?'pri':''}" id="mFav">${on?'❤️ 已收藏':'🤍 加入最愛'}</button><button class="btn" onclick="window.print()">🖨️ 列印教案</button><button class="btn" id="mShare">🔗 複製連結</button></div></div>
+  <div class="mbody">
+    <div class="two">
+      <div class="lsec"><h3>🎯 活動目標</h3><ul>${l.goals.map(g=>`<li>${esc(g)}</li>`).join('')}</ul><p style="margin:8px 0 0"><b>人數：</b>${esc(l.group)}</p></div>
+      <div class="lsec"><h3>🧺 準備物品</h3><ul>${l.prep.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>
+    </div>
+    <div class="lsec"><h3>📋 活動流程</h3><ol>${l.steps.map(s=>{const m=s.match(/^(.{2,6})：(.*)$/);return `<li>${m?`<b>${esc(m[1])}：</b>${esc(m[2])}`:esc(s)}</li>`;}).join('')}</ol></div>
+    <div class="lsec"><h3>🪜 依失智程度調整</h3><div class="adapt">${LV.map(k=>`<div><b>${k}</b>${esc(l.adapt[k]||'—')}</div>`).join('')}</div></div>
+    <div class="two">
+      <div class="lsec"><h3>💬 帶領提醒</h3><ul>${l.tips.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>
+      <div class="lsec"><h3>⚠️ 安全注意</h3><ul>${l.safety.map(g=>`<li>${esc(g)}</li>`).join('')}</ul><h3 style="margin-top:14px">👀 觀察重點</h3><ul>${l.observe.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>
+    </div>
+    ${l.videos.length?`<div class="lsec"><h3>🎬 延伸團康影片（REHA SHINE）</h3><div class="mini-v">${l.videos.map(v=>videoCard(vById(v),true)).join('')}</div></div>`:''}
+    <div class="lsec"><h3>🌐 相關網頁</h3><div class="rgrid">${l.links.map(w=>resCard(wById(w))).join('')}</div></div>
+    <div class="lsec noprint"><h3>🔎 延伸搜尋</h3><div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn teal" target="_blank" rel="noopener" href="https://www.google.com/search?q=${gq}">Google：${esc(l.q)}</a>
+      <a class="btn pri" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${gq}">YouTube：${esc(l.q)}</a></div></div>
+  </div>`;
+  openModal();
+  $('#mFav').onclick=()=>{const added=toggle(S.favL,id);save();toast(added?'已加入我的最愛':'已移除收藏');refreshAll();openLesson(id);};
+  $('#mShare').onclick=()=>{const u=location.href.split('#')[0]+'#lesson/'+id;navigator.clipboard?.writeText(u).then(()=>toast('已複製連結'),()=>toast(u));};
+  bindVideoCards($('#mbox'));bindResCards($('#mbox'));
+}
+
+/* ---------- modal ---------- */
+let modalReturn=null;
+function openModal(){$('#modal').classList.add('on');document.body.style.overflow='hidden';$('#mbox .mclose').onclick=closeModal;}
+function closeModal(){$('#modal').classList.remove('on');document.body.style.overflow='';$('#mbox').innerHTML='';
+  if(location.hash.startsWith('#lesson/'))history.replaceState(null,'','#lessons');
+  if(modalReturn){const f=modalReturn;modalReturn=null;f();}else refreshAll();}
+$('#modal').onclick=e=>{if(e.target.id==='modal')closeModal();};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#modal').classList.contains('on'))closeModal();});
+
+/* ---------- videos ---------- */
+const VF={};let vFmt='all',vLimit=48,vListView=false;
+const myTags=id=>S.vTags[id]||[];
+function videoFiltered(){const q=$('#vq').value.trim().toLowerCase();let arr=allVideos();
+  if(vFmt==='mine')arr=S.myVideos;else if(vFmt!=='all')arr=arr.filter(v=>v.fmt===vFmt);
+  arr=arr.filter(v=>matchAny(VF.lv,v.lv)&&matchAny(VF.set,v.set)&&matchAny(VF.goals,v.goals)&&matchAny(VF.part,v.part)&&matchAny(VF.props,v.props)&&matchAny(VF.prep,v.prep)&&matchAny(VF.my,myTags(v.id))&&matchAny(VF.st,[S.favV.includes(v.id)?'已收藏':'',S.watched[v.id]?'已看過':'未看過'])
+    &&(!q||(v.t+v.how+(v.jp||'')+v.props.join()+v.goals.join()+myTags(v.id).join()+(S.notes[v.id]||'')).toLowerCase().includes(q)));
+  const so=$('#vSort').value;
+  arr=[...arr].sort(so==='views'?(a,b)=>(b.views||0)-(a.views||0):so==='new'?(a,b)=>(b.date||'').localeCompare(a.date||''):so==='short'?(a,b)=>(a.len||9999)-(b.len||9999):(a,b)=>a.t.localeCompare(b.t,'zh-Hant'));
+  return arr;}
+function renderVideos(){const base=allVideos();
+  const allMy=count(base,v=>myTags(v.id));
+  renderFilterGroups($('#vf'),[
+    {key:'st',label:'我的整理',counts:count(base,v=>[S.favV.includes(v.id)?'已收藏':'',S.watched[v.id]?'已看過':'未看過']),order:['已收藏','已看過','未看過']},
+    {key:'my',label:'我的標籤',counts:allMy},
+    {key:'lv',label:'適合的失智程度',counts:count(base,v=>v.lv),order:LV},
+    {key:'set',label:'適用場域',counts:count(base,v=>v.set),order:SET},
+    {key:'goals',label:'訓練重點',counts:count(base,v=>v.goals)},
+    {key:'part',label:'參與方式',counts:count(base,v=>v.part)},
+    {key:'props',label:'道具',counts:count(base,v=>v.props)},
+    {key:'prep',label:'準備程度',counts:count(base,v=>v.prep)}],VF,()=>{vLimit=48;renderVideos();});
+  const arr=videoFiltered();
+  $('#vInfo').textContent=`共 ${arr.length} 支影片（Shorts ${arr.filter(v=>v.fmt==='Shorts').length}、長片 ${arr.filter(v=>v.fmt==='長片').length}）`;
+  $('#vGrid').classList.toggle('list',vListView);
+  $('#vGrid').innerHTML=arr.length?arr.slice(0,vLimit).map(v=>videoCard(v)).join(''):`<div class="empty">${vFmt==='mine'?'還沒有新增影片，按「＋ 新增影片」貼上 YouTube 或 Shorts 網址。':'沒有符合的影片，試試清除篩選。'}</div>`;
+  $('#vMore').style.display=arr.length>vLimit?'':'none';
+  bindVideoCards($('#vGrid'));}
+function fmtViews(n){if(n==null)return '';return n>=10000?(n/10000).toFixed(1).replace('.0','')+' 萬次':n+' 次';}
+function videoCard(v,mini){if(!v)return '';const fav=S.favV.includes(v.id);
+  return `<div class="vcard"><div class="vthumb" data-play="${v.id}" style="background-image:url('https://i.ytimg.com/vi/${v.id}/mqdefault.jpg')">
+    <span class="fmt ${v.fmt==='長片'?'long':''}">${v.fmt}</span>${v.lt?`<span class="len">${v.lt}</span>`:''}${S.watched[v.id]?'<span class="seen">✓ 看過</span>':''}<div class="play"><span>▶</span></div></div>
+    <div class="vbody"><h4 data-play="${v.id}">${esc(v.t)}</h4>${mini?'':`<div class="how">${esc(v.how||S.notes[v.id]||'')}</div>`}
+    <div>${(v.lv||[]).map(s=>`<span class="tag lv">${s}</span>`).join('')}${mini?'':myTags(v.id).map(t=>`<span class="tag my">#${esc(t)}</span>`).join('')}</div>
+    ${mini?'':`<div style="font-size:.8rem;color:var(--muted)">${esc(v.ch||'')}${v.views!=null?' ・ '+fmtViews(v.views):''}${v.date?' ・ '+v.date:''}</div>`}
+    <div class="vactions"><button class="${fav?'on':''}" data-fv="${v.id}">${fav?'❤️':'🤍'} 收藏</button>${mini?'':`<button data-al="${v.id}">🗂️ 清單</button>`}</div></div></div>`;}
+function bindVideoCards(root){
+  root.querySelectorAll('[data-play]').forEach(e=>e.onclick=()=>{const inLesson=$('#modal').classList.contains('on')&&location.hash.startsWith('#lesson/');
+    if(inLesson){const lid=location.hash.split('/')[1];modalReturn=()=>{location.hash='lesson/'+lid;openLesson(lid);};}
+    openVideo(e.dataset.play);});
+  root.querySelectorAll('[data-fv]').forEach(b=>b.onclick=()=>{const added=toggle(S.favV,b.dataset.fv);save();toast(added?'已加入我的最愛':'已移除收藏');
+    const fav=S.favV.includes(b.dataset.fv);root.querySelectorAll(`[data-fv="${b.dataset.fv}"]`).forEach(x=>{x.classList.toggle('on',fav);x.textContent=(fav?'❤️':'🤍')+' 收藏';});if(!$('#modal').classList.contains('on'))refreshAll();});
+  root.querySelectorAll('[data-al]').forEach(b=>b.onclick=()=>pickList(b.dataset.al));}
+$('#vq').oninput=()=>{vLimit=48;renderVideos();};
+$('#vSort').onchange=renderVideos;
+$('#vMore').onclick=()=>{vLimit+=48;renderVideos();};
+$('#vView').onclick=()=>{vListView=!vListView;$('#vView').textContent=vListView?'▦ 格狀':'☰ 清單';renderVideos();};
+$('#vClear').onclick=()=>{Object.keys(VF).forEach(k=>delete VF[k]);$('#vq').value='';renderVideos();};
+$$('#fmtTabs button').forEach(b=>b.onclick=()=>{vFmt=b.dataset.f;$$('#fmtTabs button').forEach(x=>x.classList.toggle('on',x===b));vLimit=48;renderVideos();});
+
+function openVideo(id){const v=vById(id);if(!v)return;S.watched[id]=1;save();
+  const fav=S.favV.includes(id),tags=myTags(id);
+  const usedIn=lessons.filter(l=>l.videos.includes(id));
+  $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉" style="background:rgba(255,255,255,.9);color:#12343B">✕</button>
+  <div class="player ${v.fmt==='Shorts'?'shorts':''}"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(v.t)}"></iframe></div>
+  <div class="vinfo"><h2>${esc(v.t)}</h2>
+    <div style="color:var(--muted);font-size:.9rem;margin-bottom:8px">${esc(v.ch||'')}${v.jp?' ・ 原標題：'+esc(v.jp):''}${v.views!=null?' ・ '+fmtViews(v.views):''}${v.date?' ・ '+v.date:''}</div>
+    <div style="margin-bottom:10px">${(v.lv||[]).map(s=>`<span class="tag lv">${s}</span>`).join('')}${(v.set||[]).map(s=>`<span class="tag st">${s}</span>`).join('')}${(v.goals||[]).concat(v.part||[],v.props||[]).map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div>
+    ${v.how?`<div class="lsec"><h3>玩法</h3><p style="margin:0">${esc(v.how)}</p></div>`:''}
+    ${(v.tips&&v.tips.length)?`<div class="lsec"><h3>帶領提醒</h3><ul>${v.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`:''}
+    ${usedIn.length?`<div class="lsec"><h3>用在這些教案</h3>${usedIn.map(l=>`<a class="btn sm" href="#lesson/${l.id}" style="margin:0 6px 6px 0">📘 ${esc(l.title)}</a>`).join('')}</div>`:''}
+    <div class="two">
+      <div class="field"><label>🏷️ 我的標籤（用逗號分隔）</label><input id="mTags" value="${esc(tags.join('、'))}" placeholder="例如：週一、雨天、王阿嬤喜歡"></div>
+      <div class="field"><label>📝 我的筆記</label><textarea id="mNote" placeholder="帶領心得、改編方式…">${esc(S.notes[id]||'')}</textarea></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn ${fav?'pri':''}" id="mvFav">${fav?'❤️ 已收藏':'🤍 加入最愛'}</button>
+      <button class="btn" id="mvList">🗂️ 加入清單</button>
+      <button class="btn teal" id="mvSave">💾 儲存標籤與筆記</button>
+      <a class="btn" target="_blank" rel="noopener" href="${v.fmt==='Shorts'?'https://www.youtube.com/shorts/':'https://www.youtube.com/watch?v='}${id}">在 YouTube 開啟 ↗</a>
+      ${v.src==='mine'?`<button class="btn" id="mvEdit">✏️ 編輯</button><button class="btn" id="mvDel">🗑️ 刪除</button>`:''}
+      <button class="btn ghost" id="mvUnseen">標為未看過</button>
+    </div></div>`;
+  openModal();
+  $('#mvFav').onclick=()=>{toggle(S.favV,id);save();openVideo(id);};
+  $('#mvList').onclick=()=>pickList(id);
+  $('#mvSave').onclick=()=>{S.vTags[id]=$('#mTags').value.split(/[,，、\s]+/).map(s=>s.trim().replace(/^#/,'')).filter(Boolean);if(!S.vTags[id].length)delete S.vTags[id];
+    const n=$('#mNote').value.trim();if(n)S.notes[id]=n;else delete S.notes[id];save();toast('已儲存');};
+  $('#mvUnseen').onclick=()=>{delete S.watched[id];save();toast('已標為未看過');};
+  if(v.src==='mine'){$('#mvEdit').onclick=()=>videoForm(v);$('#mvDel').onclick=()=>{if(!confirm('確定刪除這支影片？'))return;S.myVideos=S.myVideos.filter(x=>x.id!==id);S.favV=S.favV.filter(x=>x!==id);S.lists.forEach(L=>L.items=L.items.filter(x=>x!==id));save();closeModal();refreshAll();toast('已刪除');};}
+}
+
+/* ---------- add / edit video ---------- */
+function parseYT(u){u=u.trim();let m=u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/);if(m)return{id:m[1],shorts:/shorts\//.test(u)};if(/^[\w-]{11}$/.test(u))return{id:u,shorts:false};return null;}
+$('#addVideoBtn').onclick=()=>videoForm(null);
+function videoForm(v){const ed=!!v;v=v||{t:'',how:'',lv:[],set:[],goals:[],props:[],part:[],fmt:'Shorts'};
+  const goalOpts=[...new Set(videos.flatMap(x=>x.goals))].concat(['懷舊','音樂','感官','生活任務','藝術']).filter((x,i,a)=>a.indexOf(x)===i);
+  const ck=(name,opts,sel)=>opts.map(o=>`<label class="chip ${sel.includes(o)?'on':''}" style="cursor:pointer"><input type="checkbox" name="${name}" value="${esc(o)}" ${sel.includes(o)?'checked':''} hidden>${esc(o)}</label>`).join('');
+  $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉">✕</button><div class="mhead"><h2>${ed?'編輯影片':'＋ 新增 YouTube／Shorts 影片'}</h2><p style="margin:0;color:var(--muted)">貼上網址就能加入你的資料庫，只存在這台裝置的瀏覽器。</p></div>
+  <div class="mbody">
+    <div class="field"><label>影片網址（YouTube 或 Shorts）</label><input id="fUrl" value="${ed?(v.fmt==='Shorts'?'https://www.youtube.com/shorts/':'https://www.youtube.com/watch?v=')+v.id:''}" ${ed?'disabled':''} placeholder="https://www.youtube.com/shorts/xxxxxxxxxxx"></div>
+    <div id="fPrev" style="margin-bottom:12px"></div>
+    <div class="two"><div class="field"><label>影片名稱</label><input id="fTitle" value="${esc(v.t)}" placeholder="例如：坐姿老歌律動"></div>
+    <div class="field"><label>頻道或來源</label><input id="fCh" value="${esc(v.ch||'')}" placeholder="例如：某某日照中心"></div></div>
+    <div class="field"><label>格式</label><div class="chips">${ck('fmt',['Shorts','長片'],[v.fmt])}</div></div>
+    <div class="field"><label>適合的失智程度</label><div class="chips">${ck('lv',LV,v.lv)}</div></div>
+    <div class="field"><label>適用場域</label><div class="chips">${ck('set',SET,v.set)}</div></div>
+    <div class="field"><label>訓練重點</label><div class="chips">${ck('goals',goalOpts,v.goals)}</div></div>
+    <div class="field"><label>玩法或內容摘要</label><textarea id="fHow">${esc(v.how)}</textarea></div>
+    <div class="field"><label>我的標籤（用逗號分隔）</label><input id="fTags" value="${esc(myTags(v.id||'').join('、'))}"></div>
+    <button class="btn pri" id="fSave">${ed?'💾 儲存':'＋ 加入資料庫'}</button>
+  </div>`;
+  openModal();
+  $$('#mbox label.chip').forEach(l=>l.onclick=e=>{e.preventDefault();const i=l.querySelector('input');
+    if(i.name==='fmt'){$$('#mbox input[name=fmt]').forEach(x=>{x.checked=false;x.parentElement.classList.remove('on');});}
+    i.checked=!i.checked;l.classList.toggle('on',i.checked);});
+  const prev=()=>{const p=parseYT($('#fUrl').value);$('#fPrev').innerHTML=p?`<img src="https://i.ytimg.com/vi/${p.id}/mqdefault.jpg" style="width:240px;max-width:100%;border-radius:12px" alt="預覽">`:'';
+    if(p&&p.shorts&&!ed){$$('#mbox input[name=fmt]').forEach(x=>{x.checked=x.value==='Shorts';x.parentElement.classList.toggle('on',x.checked);});}};
+  $('#fUrl').oninput=prev;prev();
+  $('#fSave').onclick=()=>{const p=ed?{id:v.id}:parseYT($('#fUrl').value);if(!p){toast('請貼上正確的 YouTube 網址');return;}
+    if(!ed&&allVideos().some(x=>x.id===p.id)){toast('這支影片已經在資料庫裡');openVideo(p.id);return;}
+    const g=n=>$$(`#mbox input[name=${n}]:checked`).map(x=>x.value);
+    const nv={id:p.id,rs:'',fmt:g('fmt')[0]||'Shorts',cat:'我新增的',t:$('#fTitle').value.trim()||'未命名影片',jp:'',how:$('#fHow').value.trim(),goals:g('goals'),part:[],pos:[],props:[],prep:'',tips:[],lv:g('lv'),set:g('set'),len:null,lt:'',views:null,date:ed?v.date:new Date().toISOString().slice(0,10),ch:$('#fCh').value.trim()||'我新增的影片',src:'mine'};
+    if(ed)S.myVideos=S.myVideos.map(x=>x.id===v.id?nv:x);else S.myVideos.unshift(nv);
+    const tg=$('#fTags').value.split(/[,，、\s]+/).map(s=>s.trim().replace(/^#/,'')).filter(Boolean);if(tg.length)S.vTags[nv.id]=tg;else delete S.vTags[nv.id];
+    save();toast(ed?'已儲存':'已加入資料庫');closeModal();vFmt='mine';$$('#fmtTabs button').forEach(x=>x.classList.toggle('on',x.dataset.f==='mine'));location.hash='videos';renderVideos();};
+}
+
+/* ---------- lists ---------- */
+let curList=null;
+function pickList(id){const v=vById(id);
+  const back=$('#modal').classList.contains('on')&&$('.player')?()=>openVideo(id):null;
+  $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉">✕</button><div class="mhead"><h2>加入清單</h2><p style="margin:0;color:var(--muted)">${esc(v?v.t:'')}</p></div>
+  <div class="mbody"><div class="listpick">${S.lists.map(L=>`<label><input type="checkbox" data-li="${L.id}" ${L.items.includes(id)?'checked':''}>${esc(L.name)} <small style="color:var(--muted)">（${L.items.length}）</small></label>`).join('')||'<p style="color:var(--muted)">還沒有清單，先建立一個吧。</p>'}</div>
+  <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><input id="nlName" placeholder="新清單名稱" style="flex:1;min-width:180px;font:inherit;padding:10px 14px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink)"><button class="btn pri" id="nlAdd">＋ 建立並加入</button></div>
+  ${back?'<button class="btn ghost" id="plBack" style="margin-top:14px">← 回到影片</button>':''}</div>`;
+  openModal();
+  $$('#mbox [data-li]').forEach(c=>c.onchange=()=>{const L=S.lists.find(x=>x.id===c.dataset.li);if(c.checked){if(!L.items.includes(id))L.items.push(id);}else L.items=L.items.filter(x=>x!==id);save();toast(c.checked?'已加入「'+L.name+'」':'已從清單移除');});
+  $('#nlAdd').onclick=()=>{const n=$('#nlName').value.trim();if(!n){toast('請輸入清單名稱');return;}S.lists.push({id:'L'+Date.now(),name:n,items:[id]});save();toast('已建立「'+n+'」');pickList(id);};
+  if(back)$('#plBack').onclick=back;
+}
+$('#newList').onclick=()=>{const n=prompt('清單名稱（例如：週一據點活動）');if(!n||!n.trim())return;const L={id:'L'+Date.now(),name:n.trim(),items:[]};S.lists.push(L);curList=L.id;save();renderLists();};
+function renderLists(){
+  if(!S.lists.find(l=>l.id===curList))curList=S.lists[0]?.id||null;
+  $('#listNames').innerHTML=S.lists.length?S.lists.map(L=>`<div class="list-item ${L.id===curList?'on':''}" data-cl="${L.id}"><span>🗂️ ${esc(L.name)}</span><small>${L.items.length} 支</small></div>`).join(''):'<div class="empty">還沒有清單。<br>在影片上按「🗂️ 清單」，或按上方「＋ 建立新清單」。</div>';
+  $$('#listNames [data-cl]').forEach(e=>e.onclick=()=>{curList=e.dataset.cl;renderLists();});
+  const L=S.lists.find(l=>l.id===curList);
+  if(!L){$('#listBody').innerHTML='';return;}
+  $('#listBody').innerHTML=`<div class="toolbar"><h2 style="margin:0;font-size:1.4rem;flex:1">${esc(L.name)}</h2><button class="btn sm" id="lRen">✏️ 改名</button><button class="btn sm" id="lDel">🗑️ 刪除清單</button></div>
+   ${L.items.length?`<div class="vgrid list">${L.items.map((id,i)=>{const v=vById(id);if(!v)return '';return videoCard(v).replace('<div class="vactions">',`<div class="vactions"><button data-mv="${i}|-1" title="上移">⬆️</button><button data-mv="${i}|1" title="下移">⬇️</button><button data-rm="${id}">✕ 移出</button>`);}).join('')}</div>`:'<div class="empty">這個清單還是空的。到「影片資料庫」在影片上按「🗂️ 清單」加入。</div>'}`;
+  bindVideoCards($('#listBody'));
+  $('#lRen').onclick=()=>{const n=prompt('新的清單名稱',L.name);if(n&&n.trim()){L.name=n.trim();save();renderLists();}};
+  $('#lDel').onclick=()=>{if(confirm('確定刪除清單「'+L.name+'」？（影片本身不會被刪除）')){S.lists=S.lists.filter(x=>x!==L);save();renderLists();}};
+  $$('#listBody [data-rm]').forEach(b=>b.onclick=()=>{L.items=L.items.filter(x=>x!==b.dataset.rm);save();renderLists();});
+  $$('#listBody [data-mv]').forEach(b=>b.onclick=()=>{const[i,d]=b.dataset.mv.split('|').map(Number);const j=i+d;if(j<0||j>=L.items.length)return;[L.items[i],L.items[j]]=[L.items[j],L.items[i]];save();renderLists();});
+}
+
+/* ---------- web resources ---------- */
+let wTopic=null;
+function resCard(r){if(!r)return '';const on=S.favW.includes(r.id);
+  return `<div class="rcard"><button class="heart ${on?'on':''}" data-fw="${r.id}" aria-label="收藏">${on?'❤️':'🤍'}</button>
+  <div><span class="type-badge">${esc(r.type)}</span> <span class="tag">${esc(r.lang)}</span>${r.year?`<span class="tag">${r.year}</span>`:''}</div>
+  <h3>${esc(r.title)}</h3><div class="org">${esc(r.org)}</div><p>${esc(r.summary)}</p>
+  ${r.evidence?`<div class="ev"><b>研究怎麼做的：</b>${esc(r.evidence)}</div>`:''}
+  <div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;padding-top:6px"><a class="btn sm teal" href="${r.url}" target="_blank" rel="noopener">開啟網頁 ↗</a>
+  ${(()=>{const ls=lessons.filter(l=>l.links.includes(r.id));return ls.length?`<span style="font-size:.82rem;color:var(--muted);align-self:center">用在 ${ls.length} 份教案</span>`:''})()}</div></div>`;}
+function bindResCards(root){root.querySelectorAll('[data-fw]').forEach(b=>b.onclick=()=>{const added=toggle(S.favW,b.dataset.fw);save();toast(added?'已加入我的最愛':'已移除收藏');
+  root.querySelectorAll(`[data-fw="${b.dataset.fw}"]`).forEach(x=>{x.classList.toggle('on',added);x.textContent=added?'❤️':'🤍';});if(!$('#modal').classList.contains('on'))refreshAll();});}
+function renderWeb(){const topics=[...new Set(resources.flatMap(r=>r.topics))];
+  $('#wTopics').innerHTML=['全部',...topics].map(t=>`<button class="chip ${(wTopic||'全部')===t?'on':''}" data-t="${t}">${t}</button>`).join('');
+  $$('#wTopics .chip').forEach(c=>c.onclick=()=>{wTopic=c.dataset.t==='全部'?null:c.dataset.t;renderWeb();});
+  const q=$('#wq').value.trim().toLowerCase();
+  const arr=resources.filter(r=>(!wTopic||r.topics.includes(wTopic))&&(!q||JSON.stringify(r).toLowerCase().includes(q)));
+  $('#wGrid').innerHTML=arr.map(resCard).join('')||'<div class="empty">沒有符合的網頁。</div>';bindResCards($('#wGrid'));}
+$('#wq').oninput=renderWeb;
+const PRESET=['失智 長輩 活動','失智 懷舊治療 活動','失智 音樂 照護','失智 手指操','長輩 坐姿 律動 老歌','失智 蒙特梭利 活動','失智 居家 照顧 活動','レクリエーション 認知症 高齢者','dementia activities ideas','cognitive stimulation therapy session'];
+$('#sPreset').innerHTML=PRESET.map(p=>`<button class="chip" data-p="${esc(p)}">${esc(p)}</button>`).join('');
+$$('#sPreset .chip').forEach(c=>c.onclick=()=>{$('#sq').value=c.dataset.p;updSearch();});
+function updSearch(){const q=encodeURIComponent($('#sq').value.trim());$('#gLink').href='https://www.google.com/search?q='+q;$('#yLink').href='https://www.youtube.com/results?search_query='+q;}
+$('#sq').oninput=updSearch;updSearch();
+
+/* ---------- favourites ---------- */
+function renderFavs(){
+  const L=S.favL.map(lById).filter(Boolean),V=S.favV.map(vById).filter(Boolean),W=S.favW.map(wById).filter(Boolean);
+  $('#favBody').innerHTML=`
+   <div class="fav-sec"><h2 class="sec">📘 收藏的教案（${L.length}）</h2>${L.length?`<div class="lgrid">${L.map(lessonCard).join('')}</div>`:'<div class="empty">在教案上按 🤍 就能收藏。</div>'}</div>
+   <div class="fav-sec"><h2 class="sec">🎬 收藏的影片（${V.length}）</h2>${V.length?`<div class="vgrid">${V.map(v=>videoCard(v)).join('')}</div>`:'<div class="empty">在影片上按「🤍 收藏」就能收藏。</div>'}</div>
+   <div class="fav-sec"><h2 class="sec">🌐 收藏的網頁（${W.length}）</h2>${W.length?`<div class="rgrid">${W.map(resCard).join('')}</div>`:'<div class="empty">在網頁資源上按 🤍 就能收藏。</div>'}</div>`;
+  bindLessonCards($('#favBody'));bindVideoCards($('#favBody'));bindResCards($('#favBody'));}
+$('#exportBtn').onclick=()=>{const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='失智活動資料庫-我的資料-'+new Date().toISOString().slice(0,10)+'.json';a.click();toast('已匯出');};
+$('#importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);
+  const uni=(a,b)=>[...new Set([...(a||[]),...(b||[])])];
+  S.favL=uni(S.favL,d.favL);S.favV=uni(S.favV,d.favV);S.favW=uni(S.favW,d.favW);
+  (d.myVideos||[]).forEach(v=>{if(!allVideos().some(x=>x.id===v.id))S.myVideos.push(v);});
+  (d.lists||[]).forEach(L=>{const ex=S.lists.find(x=>x.id===L.id);if(ex)ex.items=uni(ex.items,L.items);else S.lists.push(L);});
+  Object.assign(S.vTags,d.vTags||{});Object.assign(S.notes,d.notes||{});Object.assign(S.watched,d.watched||{});
+  save();refreshAll();toast('已匯入並合併');}catch(err){toast('檔案格式不正確');}};rd.readAsText(f);e.target.value='';};
+
+/* ---------- quick entries ---------- */
+$$('[data-quick]').forEach(b=>b.onclick=()=>{const[s,tab]=b.dataset.quick.split('|');
+  if(tab==='lessons'){Object.keys(LF).forEach(k=>delete LF[k]);LF.set=new Set([s]);renderLessons();}else{Object.keys(VF).forEach(k=>delete VF[k]);VF.set=new Set([s]);renderVideos();}
+  location.hash=tab;});
+$$('[data-stage]').forEach(b=>b.onclick=()=>{Object.keys(LF).forEach(k=>delete LF[k]);LF.lv=new Set([b.dataset.stage]);renderLessons();location.hash='lessons';});
+
+function updateCounts(){const n=S.favL.length+S.favV.length+S.favW.length;$('#favCount').textContent=n;$('#sF').textContent=n;}
+function refreshAll(){renderLessons();renderVideos();renderWeb();updateCounts();
+  if($('#v-favs').classList.contains('on'))renderFavs();if($('#v-lists').classList.contains('on'))renderLists();}
+$('#sL').textContent=lessons.length;$('#sV').textContent=videos.length;$('#sW').textContent=resources.length;
+refreshAll();route();
+})();
+</script>
+</body>
+</html>
