@@ -1,97 +1,84 @@
 #!/usr/bin/env python3
-"""產生 index.html：讀取同資料夾內的教案、網頁資源與 REHA SHINE 影片資料，內嵌到 template.html。"""
-import json, re, pathlib
+"""產生 index.html：讀取同資料夾內的教案、網頁資源與影片資料，內嵌到 template.html。
+
+影片來源：
+- other_videos.json + other_meta.txt：台灣與其他國家頻道的影片（逐支看過畫面挑選）
+- rehashine_database.json：REHA SHINE 團康影片，只保留 REHA_KEEP 名單內、適合失智長輩的影片
+"""
+import json, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent
-D = ROOT
+rd = lambda n: json.loads((ROOT / n).read_text(encoding="utf-8"))
 
-lessons = json.loads((D / "lessons.json").read_text(encoding="utf-8"))
-resources = json.loads((D / "resources.json").read_text(encoding="utf-8"))
-raw = json.loads((D / "rehashine_database.json").read_text(encoding="utf-8"))
+lessons = rd("lessons.json")
+resources = rd("resources.json")
+raw = rd("rehashine_database.json")
+other = rd("other_videos.json")
+meta = {}
+for line in (ROOT / "other_meta.txt").read_text(encoding="utf-8").splitlines():
+    if line.strip():
+        vid, ch, ln, views, date = line.strip().split("~")
+        meta[vid] = (ch, int(ln), int(views), date)
 
-COG = ["相反", "喊", "數字", "漢字", "排序", "計時", "記住", "猜", "口令", "國旗", "指令", "主題卡", "加總", "計算"]
-PRECISE = ["平衡", "迷宮", "控", "軌道", "夾", "疊", "架橋", "立盤"]
-GROUPY = {"團隊合作", "競賽對戰", "接力傳遞"}
-EASY_PROPS = {"氣球", "毛巾／大布", "扇子", "沙包"}
+# 坐姿、規則簡單、免自製大型教具、觀看數較高的 REHA SHINE 影片
+REHA_KEEP = """h5W-ASCZLyU y3vQanpW4d8 HgPL4mGoXz4 UYRDqa0VM0g e5HEQrITBzs ZvToEppP3Fw xWo8VmeVbp0
+zDJkygdtXvc bcgMbb4fCqg Bw8ODMVjcIw YY1hTFjfCw8 8HhkzjpYEg0 ahlncZZBUkM 1qVIeSXLTuQ Zm0BIDQ_LY8
+cF4Jw1Ixehc B0YxzoevPrA aYRjuQWNmCk YqB98DcrQr4 yCDFYnXAmPY l6yzdYCF9bU jKmK8G9lIhs PPyh-tgtJYI""".split()
 
-
-def dementia_levels(v):
-    if v["category"] in ("教具製作與介紹", "媒體報導"):
-        return []
-    t = v["zh_title"] + v["how_to_play"]
-    if any(k in t for k in COG):
-        return ["輕度"]
-    if "站姿" in v["posture"]:
-        return ["輕度", "中度"]
-    if any(k in t for k in PRECISE) or GROUPY & set(v["participation"]):
-        return ["輕度", "中度"]
-    return ["輕度", "中度", "重度"]
+LONG_OVERRIDE = {"vkSjhacD0EA"}
 
 
-def settings(v):
-    s = ["據點", "日照"]
-    solo = set(v["participation"]) & {"個人挑戰", "雙人搭檔"}
-    if solo and v["prep_level"] != "需自製教具" and "牆面／立架" not in v["place"]:
-        s.append("居家")
-    if v["category"] == "毛巾遊戲（レクル系列）" and "居家" not in s:
-        s.append("居家")
-    return s
+def lt(sec):
+    if sec is None:
+        return ""
+    h, r = divmod(sec, 3600)
+    m, s = divmod(r, 60)
+    return f"{h}:{m:02d}:{s:02d}" if h else f"{m}:{s:02d}"
 
+
+GENERIC_TIP = "影片是帶領參考，請依長輩當天的能力與狀態調整速度、次數與難度。"
+TIP_SEVERE = "中重度長輩可由照顧者在旁示範或手把手協助，碰到、參與就算成功。"
+TIP_STAND = "影片為站姿，失智或平衡較差的長輩請改坐姿進行，旁邊安排人員保護。"
 
 videos = []
-for v in raw:
-    lv = dementia_levels(v)
+for vid, region, t, how, goals, part, pos, props, lv, st in other:
+    ch, ln, views, date = meta[vid]
+    tips = [GENERIC_TIP]
+    if "重度" in lv:
+        tips.append(TIP_SEVERE)
+    if "站姿" in pos:
+        tips.append(TIP_STAND)
     videos.append({
-        "id": v["video_id"],
-        "rs": v["id"],
-        "fmt": "Shorts" if v["format"] == "Shorts" else "長片",
-        "cat": v["category"],
-        "t": v["zh_title"],
-        "jp": v["jp_title"],
-        "how": v["how_to_play"],
-        "goals": v["training_goals"],
-        "part": v["participation"],
-        "pos": v["posture"],
-        "props": v["props"],
-        "prep": v["prep_level"],
-        "tips": v["leading_tips"],
-        "lv": lv,
-        "set": settings(v),
-        "len": v["length_sec"],
-        "lt": v["length_text"],
-        "views": v["views"],
-        "date": v["publish_date"],
-        "ch": "REHA SHINE",
-        "src": "rs",
+        "id": vid, "fmt": "Shorts" if ln <= 60 and vid not in LONG_OVERRIDE else "長片",
+        "t": t, "jp": "", "how": how, "goals": goals, "part": part, "pos": pos, "props": props,
+        "prep": "", "tips": tips, "lv": lv, "set": st, "len": ln, "lt": lt(ln), "views": views,
+        "date": date, "ch": ch, "region": region, "src": "curated",
     })
 
-# 為教案配對影片：依關鍵字與道具計分，挑出最適合失智長輩（程度涵蓋較廣）的影片
+for v in raw:
+    if v["video_id"] not in REHA_KEEP:
+        continue
+    videos.append({
+        "id": v["video_id"], "fmt": "Shorts" if v["format"] == "Shorts" else "長片",
+        "t": v["zh_title"], "jp": v["jp_title"], "how": v["how_to_play"],
+        "goals": v["training_goals"], "part": v["participation"], "pos": v["posture"],
+        "props": v["props"], "prep": "", "tips": v["leading_tips"][:2],
+        "lv": ["輕度", "中度", "重度"], "set": ["據點", "日照"] + (["居家"] if set(v["participation"]) & {"個人挑戰", "雙人搭檔"} else []),
+        "len": v["length_sec"], "lt": v["length_text"], "views": v["views"], "date": v["publish_date"],
+        "ch": "REHA SHINE（宮崎縣日照中心）", "region": "日本", "src": "curated",
+    })
+
+ids = {v["id"] for v in videos}
 for L in lessons:
-    kws, props = L["vid"]["kw"], set(L["vid"]["props"])
-    scored = []
-    if kws or props:
-        for v in videos:
-            if not v["lv"]:
-                continue
-            text = v["t"] + v["how"]
-            s = sum(3 for k in kws if k in text) + 2 * len(props & set(v["props"]))
-            if s == 0:
-                continue
-            s += len(set(v["lv"]) & set(L["stages"]))
-            s += min(v["views"], 50000) / 50000
-            scored.append((s, v["id"]))
-    scored.sort(reverse=True)
-    L["videos"] = [i for _, i in scored[:6]]
-    del L["vid"]
+    missing = [i for i in L["vids"] if i not in ids]
+    assert not missing, (L["id"], missing)
+    L["videos"] = L.pop("vids")
 
 tpl = (ROOT / "template.html").read_text(encoding="utf-8")
 payload = json.dumps({"lessons": lessons, "resources": resources, "videos": videos}, ensure_ascii=False, separators=(",", ":"))
-out = tpl.replace("/*__DATA__*/", "window.DB=" + payload + ";")
-(ROOT / "index.html").write_text(out, encoding="utf-8")
+(ROOT / "index.html").write_text(tpl.replace("/*__DATA__*/", "window.DB=" + payload + ";"), encoding="utf-8")
 
 from collections import Counter
-print("lessons", len(lessons), "resources", len(resources), "videos", len(videos))
-print("levels", Counter(",".join(v["lv"]) for v in videos))
-print("home", sum("居家" in v["set"] for v in videos))
-for L in lessons:
-    print(L["id"], L["title"], len(L["videos"]))
+print("videos", len(videos), Counter(v["region"] for v in videos), Counter(v["fmt"] for v in videos))
+print("channels", len({v["ch"] for v in videos}))
+print("lessons with videos", sum(bool(L["videos"]) for L in lessons), "/", len(lessons))

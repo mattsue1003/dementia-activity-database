@@ -238,7 +238,7 @@ footer{text-align:center;color:var(--muted);font-size:.88rem;padding:24px 16px 4
 <section class="view on" id="v-home">
   <div class="home-grid">
     <div class="stat c1" data-go="lessons"><div class="n" id="sL">0</div><div class="l">活動教案</div><div class="d">每份都有步驟、三種程度調整、帶領提醒與相關影片</div></div>
-    <div class="stat c2" data-go="videos"><div class="n" id="sV">0</div><div class="l">YouTube／Shorts 影片</div><div class="d">已標註失智程度與適用場域，也能自己新增影片</div></div>
+    <div class="stat c2" data-go="videos"><div class="n" id="sV">0</div><div class="l">YouTube／Shorts 影片</div><div class="d">台灣與各國長照單位的影片，已標註失智程度與場域，也能自己新增</div></div>
     <div class="stat c3" data-go="web"><div class="n" id="sW">0</div><div class="l">網頁資源</div><div class="d">台灣與國際機構的活動指引、實務文章</div></div>
     <div class="stat c4" data-go="favs"><div class="n" id="sF">0</div><div class="l">我的收藏</div><div class="d">收藏教案、影片、網頁，並整理成自己的清單</div></div>
   </div>
@@ -338,7 +338,7 @@ footer{text-align:center;color:var(--muted);font-size:.88rem;padding:24px 16px 4
 </main>
 
 <footer>
-  影片版權屬於各頻道（REHA SHINE／リハシャインみやこんじょ 等），本站只提供連結與嵌入播放；中文玩法為依影片畫面整理的摘要，細節以影片為準。<br>
+  影片版權屬於各頻道（台灣失智症協會、失智者照顧協會、各日照中心與據點、REHA SHINE 等），本站只提供連結與嵌入播放；中文說明為依影片畫面整理的摘要，細節以影片為準。<br>
   網頁資源連結至原始網站，內容以原網站為準。・ 設計者｜愛迪樂 鍾孟修 職能治療師
 </footer>
 
@@ -438,7 +438,7 @@ function openLesson(id){const l=lById(id);if(!l)return;const on=S.favL.includes(
       <div class="lsec"><h3>💬 帶領提醒</h3><ul>${l.tips.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>
       <div class="lsec"><h3>⚠️ 安全注意</h3><ul>${l.safety.map(g=>`<li>${esc(g)}</li>`).join('')}</ul><h3 style="margin-top:14px">👀 觀察重點</h3><ul>${l.observe.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>
     </div>
-    ${l.videos.length?`<div class="lsec"><h3>🎬 延伸團康影片（REHA SHINE）</h3><div class="mini-v">${l.videos.map(v=>videoCard(vById(v),true)).join('')}</div></div>`:''}
+    ${l.videos.length?`<div class="lsec"><h3>🎬 相關影片</h3><div class="mini-v">${l.videos.map(v=>videoCard(vById(v),true)).join('')}</div></div>`:''}
     <div class="lsec"><h3>🌐 相關網頁</h3><div class="rgrid">${l.links.map(w=>resCard(wById(w))).join('')}</div></div>
     <div class="lsec noprint"><h3>🔎 延伸搜尋</h3><div style="display:flex;gap:10px;flex-wrap:wrap">
       <a class="btn teal" target="_blank" rel="noopener" href="https://www.google.com/search?q=${gq}">Google：${esc(l.q)}</a>
@@ -464,8 +464,8 @@ const VF={};let vFmt='all',vLimit=48,vListView=false;
 const myTags=id=>S.vTags[id]||[];
 function videoFiltered(){const q=$('#vq').value.trim().toLowerCase();let arr=allVideos();
   if(vFmt==='mine')arr=S.myVideos;else if(vFmt!=='all')arr=arr.filter(v=>v.fmt===vFmt);
-  arr=arr.filter(v=>matchAny(VF.lv,v.lv)&&matchAny(VF.set,v.set)&&matchAny(VF.goals,v.goals)&&matchAny(VF.part,v.part)&&matchAny(VF.props,v.props)&&matchAny(VF.prep,v.prep)&&matchAny(VF.my,myTags(v.id))&&matchAny(VF.st,[S.favV.includes(v.id)?'已收藏':'',S.watched[v.id]?'已看過':'未看過'])
-    &&(!q||(v.t+v.how+(v.jp||'')+v.props.join()+v.goals.join()+myTags(v.id).join()+(S.notes[v.id]||'')).toLowerCase().includes(q)));
+  arr=arr.filter(v=>matchAny(VF.lv,v.lv)&&matchAny(VF.set,v.set)&&matchAny(VF.goals,v.goals)&&matchAny(VF.part,v.part)&&matchAny(VF.props,v.props)&&matchAny(VF.region,v.region||'我新增的')&&matchAny(VF.ch,v.ch)&&matchAny(VF.my,myTags(v.id))&&matchAny(VF.st,[S.favV.includes(v.id)?'已收藏':'',S.watched[v.id]?'已看過':'未看過'])
+    &&(!q||(v.t+v.how+(v.jp||'')+(v.ch||'')+v.props.join()+v.goals.join()+myTags(v.id).join()+(S.notes[v.id]||'')).toLowerCase().includes(q)));
   const so=$('#vSort').value;
   arr=[...arr].sort(so==='views'?(a,b)=>(b.views||0)-(a.views||0):so==='new'?(a,b)=>(b.date||'').localeCompare(a.date||''):so==='short'?(a,b)=>(a.len||9999)-(b.len||9999):(a,b)=>a.t.localeCompare(b.t,'zh-Hant'));
   return arr;}
@@ -476,10 +476,12 @@ function renderVideos(){const base=allVideos();
     {key:'my',label:'我的標籤',counts:allMy},
     {key:'lv',label:'適合的失智程度',counts:count(base,v=>v.lv),order:LV},
     {key:'set',label:'適用場域',counts:count(base,v=>v.set),order:SET},
+    {key:'region',label:'來源地區',counts:count(base,v=>v.region||'我新增的')},
+    {key:'ch',label:'頻道',counts:count(base,v=>v.ch)},
     {key:'goals',label:'訓練重點',counts:count(base,v=>v.goals)},
     {key:'part',label:'參與方式',counts:count(base,v=>v.part)},
     {key:'props',label:'道具',counts:count(base,v=>v.props)},
-    {key:'prep',label:'準備程度',counts:count(base,v=>v.prep)}],VF,()=>{vLimit=48;renderVideos();});
+    ],VF,()=>{vLimit=48;renderVideos();});
   const arr=videoFiltered();
   $('#vInfo').textContent=`共 ${arr.length} 支影片（Shorts ${arr.filter(v=>v.fmt==='Shorts').length}、長片 ${arr.filter(v=>v.fmt==='長片').length}）`;
   $('#vGrid').classList.toggle('list',vListView);
@@ -514,7 +516,7 @@ function openVideo(id){const v=vById(id);if(!v)return;S.watched[id]=1;save();
   $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉" style="background:rgba(255,255,255,.9);color:#12343B">✕</button>
   <div class="player ${v.fmt==='Shorts'?'shorts':''}"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(v.t)}"></iframe></div>
   <div class="vinfo"><h2>${esc(v.t)}</h2>
-    <div style="color:var(--muted);font-size:.9rem;margin-bottom:8px">${esc(v.ch||'')}${v.jp?' ・ 原標題：'+esc(v.jp):''}${v.views!=null?' ・ '+fmtViews(v.views):''}${v.date?' ・ '+v.date:''}</div>
+    <div style="color:var(--muted);font-size:.9rem;margin-bottom:8px">${esc(v.ch||'')}${v.region?' ・ '+esc(v.region):''}${v.jp?' ・ 原標題：'+esc(v.jp):''}${v.views!=null?' ・ '+fmtViews(v.views):''}${v.date?' ・ '+v.date:''}</div>
     <div style="margin-bottom:10px">${(v.lv||[]).map(s=>`<span class="tag lv">${s}</span>`).join('')}${(v.set||[]).map(s=>`<span class="tag st">${s}</span>`).join('')}${(v.goals||[]).concat(v.part||[],v.props||[]).map(s=>`<span class="tag">${esc(s)}</span>`).join('')}</div>
     ${v.how?`<div class="lsec"><h3>玩法</h3><p style="margin:0">${esc(v.how)}</p></div>`:''}
     ${(v.tips&&v.tips.length)?`<div class="lsec"><h3>帶領提醒</h3><ul>${v.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`:''}
