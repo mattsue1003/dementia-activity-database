@@ -171,10 +171,10 @@ aside.filters{background:var(--paper);border-radius:var(--r);padding:16px 18px;b
 .mbox{background:var(--paper);border-radius:22px;max-width:980px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);position:relative;animation:pop .2s ease}
 @keyframes pop{from{transform:scale(.97);opacity:0}to{transform:none;opacity:1}}
 .mclose{position:absolute;top:12px;right:12px;width:46px;height:46px;border-radius:50%;border:0;background:var(--soft);font-size:1.4rem;z-index:3;color:var(--ink)}
-.mhead{padding:26px 28px 16px;border-bottom:2px solid var(--line)}
+.mhead{padding:26px 70px 16px 28px;border-bottom:2px solid var(--line)}
 .mhead h2{margin:4px 60px 8px 0;font-size:1.7rem;line-height:1.3}
 .mbody{padding:20px 28px 28px}
-@media(max-width:560px){.mhead,.mbody{padding-left:18px;padding-right:18px}.mhead h2{font-size:1.4rem}}
+@media(max-width:560px){.mhead,.mbody{padding-left:18px;padding-right:18px}.mhead{padding-right:66px}.mhead h2{font-size:1.4rem}}
 .lsec{margin-bottom:22px}
 .lsec h3{font-size:1.15rem;margin:0 0 8px;color:var(--orange)}
 .lsec ol,.lsec ul{margin:0;padding-left:1.4em}
@@ -237,7 +237,7 @@ footer{text-align:center;color:var(--muted);font-size:.88rem;padding:24px 16px 4
 <!-- HOME -->
 <section class="view on" id="v-home">
   <div class="home-grid">
-    <div class="stat c1" data-go="lessons"><div class="n" id="sL">0</div><div class="l">活動教案</div><div class="d">每份都有步驟、三種程度調整、帶領提醒與相關影片</div></div>
+    <div class="stat c1" data-go="lessons"><div class="n" id="sL">0</div><div class="l">教案與活動點子</div><div class="d" id="sLd">完整教案有步驟、三種程度調整與相關影片；活動點子可快速找靈感</div></div>
     <div class="stat c2" data-go="videos"><div class="n" id="sV">0</div><div class="l">YouTube／Shorts 影片</div><div class="d">台灣與各國長照單位的影片，已標註失智程度與場域，也能自己新增</div></div>
     <div class="stat c3" data-go="web"><div class="n" id="sW">0</div><div class="l">網頁資源</div><div class="d">台灣與國際機構的活動指引、實務文章</div></div>
     <div class="stat c4" data-go="favs"><div class="n" id="sF">0</div><div class="l">我的收藏</div><div class="d">收藏教案、影片、網頁，並整理成自己的清單</div></div>
@@ -270,7 +270,7 @@ footer{text-align:center;color:var(--muted);font-size:.88rem;padding:24px 16px 4
 <!-- LESSONS -->
 <section class="view" id="v-lessons">
   <div class="toolbar">
-    <div class="search"><input id="lq" placeholder="搜尋教案：例如 老歌、摺衣服、氣球…" aria-label="搜尋教案"></div>
+    <div class="search"><input id="lq" placeholder="搜尋教案與活動點子：例如 老歌、摺衣服、氣球…" aria-label="搜尋教案"></div>
     <button class="btn ftoggle" data-ft="lf">⚙️ 篩選</button>
   </div>
   <div class="layout">
@@ -395,25 +395,26 @@ const matchAny=(set,vals)=>!set||!set.size||[].concat(vals||[]).some(v=>set.has(
 /* ---------- lessons ---------- */
 const LF={};
 function lessonFiltered(){const q=$('#lq').value.trim().toLowerCase();
-  return lessons.filter(l=>matchAny(LF.set,l.settings)&&matchAny(LF.lv,l.stages)&&matchAny(LF.cat,l.cat)&&matchAny(LF.goal,l.goals)
+  return lessons.filter(l=>matchAny(LF.kind,l.kind==='idea'?'活動點子':'完整教案')&&matchAny(LF.origin,l.origin)&&matchAny(LF.set,l.settings)&&matchAny(LF.lv,l.stages)&&matchAny(LF.cat,l.cat)
     &&(!q||JSON.stringify(l).toLowerCase().includes(q)));}
 function renderLessons(){
   const cats=[...new Set(lessons.map(l=>l.cat))];
   renderFilterGroups($('#lf'),[
+    {key:'kind',label:'類型',counts:count(lessons,l=>l.kind==='idea'?'活動點子':'完整教案'),order:['完整教案','活動點子']},
     {key:'set',label:'服務場域',counts:count(lessons,l=>l.settings),order:SET},
     {key:'lv',label:'失智程度',counts:count(lessons,l=>l.stages),order:LV},
     {key:'cat',label:'活動類別',counts:count(lessons,l=>l.cat),order:cats},
-    {key:'goal',label:'活動目標',counts:count(lessons,l=>l.goals)}],LF,renderLessons);
+    {key:'origin',label:'點子靈感來源',counts:count(lessons,l=>l.origin)}],LF,renderLessons);
   const list=lessonFiltered();
-  $('#lInfo').textContent=`共 ${list.length} 份教案`;
+  $('#lInfo').textContent=`共 ${list.length} 筆（完整教案 ${list.filter(l=>l.kind!=='idea').length}、活動點子 ${list.filter(l=>l.kind==='idea').length}）`;
   $('#lGrid').innerHTML=list.length?list.map(lessonCard).join(''):'<div class="empty">沒有符合的教案，試試清除篩選。</div>';
   bindLessonCards($('#lGrid'));
 }
 function lessonCard(l){const on=S.favL.includes(l.id);
   return `<div class="lcard cat-${l.cat}" data-l="${l.id}"><button class="heart ${on?'on':''}" data-fl="${l.id}" aria-label="收藏">${on?'❤️':'🤍'}</button>
-  <div class="cat">${esc(l.cat)}</div><h3>${esc(l.title)}</h3><p>${esc(l.summary)}</p>
+  <div class="cat">${l.kind==='idea'?'<span class="tag my">活動點子</span>':'<span class="tag st">完整教案</span>'} ${esc(l.cat)}</div><h3>${esc(l.title)}</h3><p>${esc(l.summary)}</p>
   <div>${l.settings.map(s=>`<span class="tag st">${s}</span>`).join('')}${l.stages.map(s=>`<span class="tag lv">${s}</span>`).join('')}</div>
-  <div class="meta">👥 ${esc(l.group)}${l.videos.length?` ・ 🎬 ${l.videos.length} 支影片`:''} ・ 🌐 ${l.links.length} 個網頁</div></div>`;}
+  <div class="meta">${l.kind==='idea'?`💡 靈感：${esc(l.origin)}`:`👥 ${esc(l.group)}`}${l.videos.length?` ・ 🎬 ${l.videos.length} 支影片`:''}${l.links.length?` ・ 🌐 ${l.links.length} 個網頁`:''}</div></div>`;}
 function bindLessonCards(root){
   root.querySelectorAll('[data-l]').forEach(c=>c.onclick=e=>{if(e.target.closest('[data-fl]'))return;location.hash='lesson/'+c.dataset.l;});
   root.querySelectorAll('[data-fl]').forEach(b=>b.onclick=e=>{e.stopPropagation();const added=toggle(S.favL,b.dataset.fl);save();toast(added?'已加入我的最愛':'已移除收藏');refreshAll();});
@@ -422,6 +423,7 @@ $('#lq').oninput=renderLessons;
 $('#lClear').onclick=()=>{Object.keys(LF).forEach(k=>delete LF[k]);$('#lq').value='';renderLessons();};
 
 function openLesson(id){const l=lById(id);if(!l)return;const on=S.favL.includes(id);
+  if(l.kind==='idea'){openIdea(l,on);return;}
   const gq=encodeURIComponent(l.q);
   $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉">✕</button>
   <div class="mhead"><span class="tag">${esc(l.cat)}</span>${l.settings.map(s=>`<span class="tag st">${s}</span>`).join('')}${l.stages.map(s=>`<span class="tag lv">${s}</span>`).join('')}
@@ -448,6 +450,30 @@ function openLesson(id){const l=lById(id);if(!l)return;const on=S.favL.includes(
   $('#mFav').onclick=()=>{const added=toggle(S.favL,id);save();toast(added?'已加入我的最愛':'已移除收藏');refreshAll();openLesson(id);};
   $('#mShare').onclick=()=>{const u=location.href.split('#')[0]+'#lesson/'+id;navigator.clipboard?.writeText(u).then(()=>toast('已複製連結'),()=>toast(u));};
   bindVideoCards($('#mbox'));bindResCards($('#mbox'));
+}
+
+function openIdea(l,on){const id=l.id,gq=encodeURIComponent(l.q);
+  $('#mbox').innerHTML=`<button class="mclose" aria-label="關閉">✕</button>
+  <div class="mhead"><span class="tag my">活動點子</span><span class="tag">${esc(l.cat)}</span>${l.settings.map(s=>`<span class="tag st">${s}</span>`).join('')}${l.stages.map(s=>`<span class="tag lv">${s}</span>`).join('')}
+    <h2>${esc(l.title)}</h2><p style="margin:0 0 6px;color:var(--muted)">💡 活動靈感來源：${esc(l.origin)}</p>
+    <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ${on?'pri':''}" id="mFav">${on?'❤️ 已收藏':'🤍 加入最愛'}</button><button class="btn" onclick="window.print()">🖨️ 列印</button><button class="btn" id="mShare">🔗 複製連結</button></div></div>
+  <div class="mbody">
+    <div class="lsec"><h3>🎲 玩法</h3><p style="margin:0;font-size:1.1rem">${esc(l.summary)}</p></div>
+    <div class="two">
+      ${l.prep.length?`<div class="lsec"><h3>🧺 準備物品</h3><ul>${l.prep.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>`:''}
+      ${l.goals.length?`<div class="lsec"><h3>🎯 訓練重點</h3><ul>${l.goals.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>`:''}
+    </div>
+    <div class="lsec"><h3>🪜 依失智程度調整</h3><div class="adapt"><div><b>輕度</b>加一點規則或計分，請長輩擔任示範者或小老師。</div><div><b>中度</b>一次一個步驟，先示範再做，目標放大、距離拉近。</div><div><b>重度</b>手把手一起做，碰到、參與就算成功，重點在感官與情緒。</div></div></div>
+    <div class="lsec"><h3>💬 帶領提醒</h3><ul><li>全程穩固坐姿，椅子靠牆或輪椅煞車；需要拿取的物品由工作人員遞送。</li><li>用引導階梯：口語 → 示範 → 碰觸提示 → 手把手，從最少的協助開始。</li><li>長輩做錯不糾正，順勢帶過並具體讚美參與的過程。</li><li>這是活動點子，正式帶領前請依長輩能力、場地與道具調整細節。</li></ul></div>
+    ${l.videos.length?`<div class="lsec"><h3>🎬 可參考的影片</h3><div class="mini-v">${l.videos.map(v=>videoCard(vById(v),true)).join('')}</div></div>`:''}
+    <div class="lsec noprint"><h3>🔎 找更多示範</h3><div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn pri" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${gq}">YouTube 搜尋示範影片</a>
+      <a class="btn teal" target="_blank" rel="noopener" href="https://www.google.com/search?q=${gq}">Google 搜尋</a></div></div>
+  </div>`;
+  openModal();
+  $('#mFav').onclick=()=>{const added=toggle(S.favL,id);save();toast(added?'已加入我的最愛':'已移除收藏');refreshAll();openLesson(id);};
+  $('#mShare').onclick=()=>{const u=location.href.split('#')[0]+'#lesson/'+id;navigator.clipboard?.writeText(u).then(()=>toast('已複製連結'),()=>toast(u));};
+  bindVideoCards($('#mbox'));
 }
 
 /* ---------- modal ---------- */
@@ -657,7 +683,7 @@ $$('[data-stage]').forEach(b=>b.onclick=()=>{Object.keys(LF).forEach(k=>delete L
 function updateCounts(){const n=S.favL.length+S.favV.length+S.favW.length;$('#favCount').textContent=n;$('#sF').textContent=n;}
 function refreshAll(){renderLessons();renderVideos();renderWeb();updateCounts();
   if($('#v-favs').classList.contains('on'))renderFavs();if($('#v-lists').classList.contains('on'))renderLists();}
-$('#sL').textContent=lessons.length;$('#sV').textContent=videos.length;$('#sW').textContent=resources.length;
+$('#sL').textContent=lessons.length;$('#sLd').textContent=`完整教案 ${lessons.filter(l=>l.kind!=='idea').length} 份、活動點子 ${lessons.filter(l=>l.kind==='idea').length} 個，皆可依場域與失智程度篩選`;$('#sV').textContent=videos.length;$('#sW').textContent=resources.length;
 refreshAll();route();
 })();
 </script>

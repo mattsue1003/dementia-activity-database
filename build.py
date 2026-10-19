@@ -23,7 +23,8 @@ for line in (ROOT / "other_meta.txt").read_text(encoding="utf-8").splitlines():
 # 坐姿、規則簡單、免自製大型教具、觀看數較高的 REHA SHINE 影片
 REHA_KEEP = """h5W-ASCZLyU y3vQanpW4d8 HgPL4mGoXz4 UYRDqa0VM0g e5HEQrITBzs ZvToEppP3Fw xWo8VmeVbp0
 zDJkygdtXvc bcgMbb4fCqg Bw8ODMVjcIw YY1hTFjfCw8 8HhkzjpYEg0 ahlncZZBUkM 1qVIeSXLTuQ Zm0BIDQ_LY8
-cF4Jw1Ixehc B0YxzoevPrA aYRjuQWNmCk YqB98DcrQr4 yCDFYnXAmPY l6yzdYCF9bU jKmK8G9lIhs PPyh-tgtJYI""".split()
+cF4Jw1Ixehc B0YxzoevPrA aYRjuQWNmCk YqB98DcrQr4 yCDFYnXAmPY l6yzdYCF9bU jKmK8G9lIhs PPyh-tgtJYI
+NUDiqXvihZs HQaN1z7c74E IRpvnpIb_Mo 5My8pw4xNIc zQN1mimALPk 2OMMZn6F1kE YAJorLdL72Q vU_yyQqUWyY 71BEHh5KBHg nJYJc6C5-dA""".split()
 
 LONG_OVERRIDE = {"vkSjhacD0EA"}
 
@@ -74,6 +75,24 @@ for L in lessons:
     assert not missing, (L["id"], missing)
     L["videos"] = L.pop("vids")
 
+# 活動點子（整理自「跨國失智症團康教案影片資料庫」索引中沒有對應影片的條目）：依關鍵字配對相關影片
+ideas = rd("ideas.json")
+KW = ["氣球", "毛巾", "沙包", "保齡", "沙鈴", "鈴", "律動", "拍拍", "杯", "夾", "彈珠", "扇", "呼拉圈", "彩虹傘", "黏土", "拼貼", "配對", "冰壺", "投球", "投籃", "投靶", "投進", "保齡", "老歌", "手指"]
+for I in ideas:
+    keys = [k for k in KW if k in I["title"] + I["summary"]]
+    if "折毛巾" in I["title"]:
+        keys = [k for k in keys if k != "毛巾"]
+    sc = []
+    for v in videos:
+        txt = v["t"] + v["how"]
+        n = sum(k in txt for k in keys)
+        if n:
+            sc.append((n, v["views"] or 0, v["id"]))
+    sc.sort(reverse=True)
+    I["videos"] = [i for *_, i in sc[:4]]
+    I.update({"group": "", "steps": [], "adapt": {}, "tips": [], "safety": [], "observe": [], "links": []})
+lessons = lessons + ideas
+
 tpl = (ROOT / "template.html").read_text(encoding="utf-8")
 payload = json.dumps({"lessons": lessons, "resources": resources, "videos": videos}, ensure_ascii=False, separators=(",", ":"))
 (ROOT / "index.html").write_text(tpl.replace("/*__DATA__*/", "window.DB=" + payload + ";"), encoding="utf-8")
@@ -81,4 +100,5 @@ payload = json.dumps({"lessons": lessons, "resources": resources, "videos": vide
 from collections import Counter
 print("videos", len(videos), Counter(v["region"] for v in videos), Counter(v["fmt"] for v in videos))
 print("channels", len({v["ch"] for v in videos}))
+print("ideas", len(ideas), "with videos", sum(bool(i["videos"]) for i in ideas))
 print("lessons with videos", sum(bool(L["videos"]) for L in lessons), "/", len(lessons))
